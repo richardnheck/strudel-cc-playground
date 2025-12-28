@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strudel.cc Playground</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: #1e1e1e;
+      color: #e0e0e0;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: #252526;
+      border-right: 1px solid #3e3e42;
+      overflow-y: auto;
+      padding: 15px;
+    }
+
+    .sidebar h2 {
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .snippets-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .snippet-btn {
+      padding: 10px 12px;
+      background: #2d2d30;
+      border: 1px solid #3e3e42;
+      color: #e0e0e0;
+      cursor: pointer;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      border-radius: 3px;
+      transition: all 0.2s;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .snippet-btn:hover {
+      background: #3d3d40;
+      border-color: #007acc;
+      color: #fff;
+    }
+
+    .snippet-btn.replace {
+      background: #1e3a5f;
+      border-color: #0078d4;
+    }
+
+    .snippet-btn.replace:hover {
+      background: #1e4a7a;
+    }
+
+    .snippet-btn.append {
+      background: #2d5a3d;
+      border-color: #107c10;
+    }
+
+    .snippet-btn.append:hover {
+      background: #3d7a4d;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+
+    .button-group button {
+      flex: 1;
+      padding: 8px;
+      font-size: 11px;
+      border: none;
+      border-radius: 3px;
+    }
+
+    .btn-replace {
+      background: #0078d4;
+      color: white;
+      cursor: pointer;
+    }
+
+    .btn-replace:hover {
+      background: #106ebe;
+    }
+
+    .btn-append {
+      background: #107c10;
+      color: white;
+      cursor: pointer;
+    }
+
+    .btn-append:hover {
+      background: #0d6c0d;
+    }
+
+    .editor-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    strudel-repl {
+      flex: 1;
+    }
+
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1e1e1e;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #464647;
+      border-radius: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #5a5a5a;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://unpkg.com/@strudel/repl@latest"></script>
+  <script src="js/snippets.js"></script>
+
+
+  <div class="container">
+    <div class="sidebar">
+      <h2>Snippets</h2>
+      <div class="snippets-container" id="snippetsContainer"></div>
+    </div>
+
+    <div class="editor-container">
+      <div id="strudel"></div>
+      <strudel-editor>
+        <!--
+            setcps(120/4)       
+        -->
+        </strudel-editor>
+    </div>
+  </div>
+
+  <script>
+    // Generate snippet buttons
+    const container = document.getElementById('snippetsContainer');
+    strudelSnippets.forEach((snippet) => {
+      const buttonGroup = document.createElement('div');
+      buttonGroup.className = 'button-group';
+
+      const nameBtn = document.createElement('button');
+      nameBtn.className = 'snippet-btn replace';
+      nameBtn.textContent = snippet.name;
+      nameBtn.title = 'Replace editor code with this snippet';
+      nameBtn.onclick = () => insertSnippet(snippet.code);
+
+      const appendBtn = document.createElement('button');
+      appendBtn.className = 'btn-append';
+      appendBtn.textContent = '+';
+      appendBtn.title = 'Append this snippet to editor code';
+      appendBtn.onclick = () => appendSnippet(snippet.code);
+
+      buttonGroup.appendChild(nameBtn);
+      buttonGroup.appendChild(appendBtn);
+      container.appendChild(buttonGroup);
+    });
+  </script>
+</body>
+</html>
