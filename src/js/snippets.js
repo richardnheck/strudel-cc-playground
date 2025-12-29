@@ -59,6 +59,16 @@ const strudelSnippets = [
 tags:['synth']
   },
   {
+    name: 'Programatically generate partials',
+    description:'',
+    code: `const numHarmonics = 59;
+$:note("c2 <eb2 <g2 g1>>".fast(2))
+.sound("sawtooth")
+.partials(new Array(numHarmonics).fill(1))
+._scope()`,
+    tags:['synth']
+  },
+  {
     name: '',
     description:'',
     code: ``,
