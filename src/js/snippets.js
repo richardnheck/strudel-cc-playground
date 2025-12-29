@@ -88,12 +88,21 @@ $:note("c2 <eb2 <g2 g1>>".fast(2))
     tags: []
   },
   {
+    name: 'Chilled Experimental groove #1',
+    description: 'First ever Strudel.cc groove  I made!',
+    code: `$: s("triangle*4").decay(0.5).n(irand(12)).scale('C minor')
+.room(1).roomsize(10)
+$: s("supersaw").segment(16).gain(slider(0.6, 0, 1, 0.05))
+$: s("9000_bd:1!4, [- akaixr10_hh:2]!4")
+$: s("mc303_sd:26!2").gain(slider(1,0,1,1))`,
+    tags: ['song']
+  },
+  {
     name: '',
     description: '',
     code: ``,
     tags: []
   },
-
 ];
 
 // Function to insert snippet into editor without reloading
