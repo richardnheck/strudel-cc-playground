@@ -92,8 +92,9 @@
     }
 
     .button-group button {
-      flex: 1;
-      padding: 8px;
+      
+      width:30px;
+      padding: 4px;
       font-size: 11px;
       border: none;
       border-radius: 3px;
@@ -244,22 +245,35 @@
     const container = document.getElementById('snippetsContainer');
     strudelSnippets.forEach((snippet) => {
       const buttonGroup = document.createElement('div');
+      const label = document.createElement('span');
+      label.textContent = snippet.name;
+      label.style.fontSize = '12px';
+      label.style.flexGrow = '1';
       buttonGroup.className = 'button-group';
 
       const nameBtn = document.createElement('button');
-      nameBtn.className = 'snippet-btn replace';
-      nameBtn.textContent = snippet.name;
+      nameBtn.className = 'btn-replace';
+      nameBtn.textContent = 'RE';
       nameBtn.title = 'Replace editor code with this snippet';
       nameBtn.onclick = () => insertSnippet(snippet.code);
 
       const appendBtn = document.createElement('button');
       appendBtn.className = 'btn-append';
-      appendBtn.textContent = '+';
+      appendBtn.textContent = '+E';
       appendBtn.title = 'Append this snippet to editor code';
       appendBtn.onclick = () => appendSnippet(snippet.code);
 
+      const replBtn = document.createElement('button');
+      replBtn.className = 'btn-append';
+    
+      replBtn.textContent = 'RS';
+      replBtn.title = 'Replace Repl code with this snippet';
+      replBtn.onclick = () => appendSnippetToRepl(snippet.code);
+
+      buttonGroup.appendChild(label);
       buttonGroup.appendChild(nameBtn);
       buttonGroup.appendChild(appendBtn);
+      buttonGroup.appendChild(replBtn);
       container.appendChild(buttonGroup);
     });
 
