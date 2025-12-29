@@ -124,6 +124,52 @@
       flex-direction: column;
     }
 
+    .controls {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      background: #252526;
+      border-bottom: 1px solid #3e3e42;
+    }
+
+    .control-btn {
+      padding: 10px 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: bold;
+    }
+
+    .btn-play {
+      background: #107c10;
+      color: white;
+    }
+
+    .btn-play:hover {
+      background: #0d6c0d;
+    }
+
+    .btn-update {
+      background: #0078d4;
+      color: white;
+    }
+
+    .btn-update:hover {
+      background: #106ebe;
+    }
+
+    .btn-stop {
+      background: #c42b1c;
+      color: white;
+    }
+
+    .btn-stop:hover {
+      background: #a52517;
+    }
+
     strudel-repl {
       flex: 1;
     }
@@ -158,8 +204,13 @@
     </div>
 
     <div class="editor-container">
+      <div class="controls">
+        <button class="control-btn btn-play" id="playBtn">▶ Play</button>
+        <button class="control-btn btn-update" id="updateBtn">↻ Update</button>
+        <button class="control-btn btn-stop" id="stopBtn">■ Stop</button>
+      </div>
       <div id="strudel"></div>
-      <strudel-editor>
+      <strudel-editor id="repl">
         <!--
             setcps(120/4)       
         -->
@@ -190,6 +241,25 @@
       buttonGroup.appendChild(appendBtn);
       container.appendChild(buttonGroup);
     });
+
+    // Control button handlers
+    const strudelEditorElement = document.querySelector('strudel-editor');
+    
+    document.getElementById('playBtn').onclick = () => {
+      console.log('Play button clicked');
+      const currentCode = strudelEditorElement.editor.code
+      strudelEditorElement.editor.repl.evaluate(currentCode)
+    };
+
+    document.getElementById('updateBtn').onclick = () => {
+      const currentCode = strudelEditorElement.editor.code
+      strudelEditorElement.editor.repl.evaluate(currentCode)
+    };
+
+    document.getElementById('stopBtn').onclick = () => {
+      console.log('Stop button clicked');
+      strudelEditorElement.editor.repl.scheduler.stop();
+    };
   </script>
 </body>
 </html>
