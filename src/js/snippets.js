@@ -69,6 +69,25 @@ $:note("c2 <eb2 <g2 g1>>".fast(2))
     tags:['synth']
   },
   {
+    name: 'Triangle Smooth Effected Synth',
+    description:'A smooth triangle wave synth with effects',
+    code: `$: s("triangle*4").decay(0.5).n(irand(12)).scale('C minor')
+.room(1).roomsize(10)`,
+    tags:[]
+  },
+   {
+  name: 'Driving Supersaw Bass',
+    description:'A cool supersaw bass sound with lowpass filter for bassiness',
+    code: `$: s("supersaw").seg(16).lpf(tri.range(800, 5000)).gain(2)`,
+    tags:[]
+  },
+  {
+    name: 'Smooth Spacey Synth lead',
+    description:'Supersaw synth lead sound',
+    code: `$: chord("C2").voicing().s("supersaw").seg(16).lpf(tri.range(800, 5000)).gain(2)`,
+    tags:[]
+  },
+  {
     name: '',
     description:'',
     code: ``,
