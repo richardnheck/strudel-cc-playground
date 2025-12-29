@@ -31,26 +31,26 @@ const strudelSnippets = [
   {
     name: 'Hihats with noise',
     description:'How to make hihats with noise',
-    code: `sound("bd*2,<white pink brown>*8")
+    code: `$:sound("bd*2,<white pink brown>*8")
 .decay(.04).sustain(0)._scope()`,
     tags: ['noise']
   },
   {
     name: 'Noise Synth Sound',
     description:'Noise can be added to any sound',
-    code: `note("c3").noise("<0.1 0.25 0.5>")._scope()`,
+    code: `$: note("c3").noise("<0.1 0.25 0.5>")._scope()`,
     tags: ['noise']
   },
    {
     name: 'Crackle Sound',
     description:'How to make various crackle noises',
-    code: 's("crackle*4").density("<0.01 0.04 0.2 0.5>".slow(2))._scope()',
+    code: `$:s("crackle*4").density("<0.01 0.04 0.2 0.5>".slow(2))._scope()`,
     tags: ['noise']
   },
   {
     name: 'Sick synth sound using phases',
     description:'This is a seriously sick(fat) synth sound',
-    code: `s("saw").seg(16).n(irand(12)).scale("F1:minor")
+    code: `$:s("saw").seg(16).n(irand(12)).scale("F1:minor")
 .penv(48).panchor(0).pdec(0.05)
 .delay(0.25).room(0.25)
 .compressor(-20).vib(0.3)
