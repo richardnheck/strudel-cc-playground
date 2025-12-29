@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -170,6 +171,15 @@
       background: #a52517;
     }
 
+    .btn-transfer {
+      background: #8a2be2;
+      color: white;
+    }
+
+    .btn-transfer:hover {
+      background: #7a1fd2;
+    }
+
     strudel-repl {
       flex: 1;
     }
@@ -192,6 +202,7 @@
     }
   </style>
 </head>
+
 <body>
   <script src="https://unpkg.com/@strudel/repl@latest"></script>
   <script src="src/js/snippets.js"></script>
@@ -208,21 +219,23 @@
         <button class="control-btn btn-play" id="playBtn">▶ Play</button>
         <button class="control-btn btn-update" id="updateBtn">↻ Update</button>
         <button class="control-btn btn-stop" id="stopBtn">■ Stop</button>
+        <button class="control-btn btn-transfer" id="transferBtn">⇄ Transfer</button>
       </div>
-      <div id="strudel"></div>
+
       <strudel-editor id="repl">
         <!--
             setcps(120/4)       
         -->
-        </strudel-editor>
-    
-    <script src="https://unpkg.com/@strudel/embed@latest"></script>
-    <strudel-repl>
-    <!--
+      </strudel-editor>
+
+      <script src="https://unpkg.com/@strudel/embed@latest"></script>
+      <div id="strudel"></div>
+      <!--<strudel-repl>-->
+      <!--
       setcps(120/60/4)
     -->
-    </strudel-repl>
-      </div>
+      <!--</strudel-repl>-->
+    </div>
 
   </div>
 
@@ -252,7 +265,7 @@
 
     // Control button handlers
     const strudelEditorElement = document.querySelector('strudel-editor');
-    
+
     document.getElementById('playBtn').onclick = () => {
       console.log('Play button clicked');
       const currentCode = strudelEditorElement.editor.code
@@ -268,6 +281,22 @@
       console.log('Stop button clicked');
       strudelEditorElement.editor.repl.scheduler.stop();
     };
+
+    document.getElementById('transferBtn').onclick = () => {
+      console.log('Transfer button clicked');
+      const currentCode = strudelEditorElement.editor.code;
+      //const encodedCode = btoa(currentCode);
+      //const strudelUrl = `https://strudel.cc/#${encodedCode}`;
+      //window.open(strudelUrl, '_blank');
+      document.getElementById('strudel').innerHTML = '';
+      const replEditor = document.createElement('strudel-repl');
+      replEditor.setAttribute(
+        'code',
+        `${currentCode}`,
+      );
+       document.getElementById('strudel').append(replEditor);
+    };
   </script>
 </body>
+
 </html>
